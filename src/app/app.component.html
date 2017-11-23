@@ -1,5 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
+<mat-sidenav-container (backdropClick)="sidenav.close()">
+<app-sidenav></app-sidenav>
 <app-navigation></app-navigation>
+
 <router-outlet></router-outlet>
 <div style="text-align:center">
   <h1>
@@ -20,3 +23,4 @@
   </li>
 </ul>
 
+</mat-sidenav-container>

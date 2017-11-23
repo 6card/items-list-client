@@ -10,9 +10,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { TabsComponent } from './components/tabs/tabs.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 const	routes:	Routes	=	[
   {path:	'',	redirectTo:	'login',	pathMatch:	'full'},
@@ -32,7 +34,8 @@ const	routes:	Routes	=	[
     AppComponent,
     LoginComponent,
     TabsComponent,
-    NavigationComponent
+    NavigationComponent,
+    SidenavComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -40,6 +43,7 @@ const	routes:	Routes	=	[
     MatToolbarModule,    
     MatIconModule,
     MatButtonModule,
+    MatSidenavModule,
 
     BrowserModule,
     RouterModule.forRoot(routes, {useHash: false})
