@@ -11,6 +11,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material';
 
 import { TabsComponent } from './components/tabs/tabs.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -44,6 +47,9 @@ const	routes:	Routes	=	[
     MatIconModule,
     MatButtonModule,
     MatSidenavModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
 
     BrowserModule,
     RouterModule.forRoot(routes, {useHash: false})
