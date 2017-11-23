@@ -4,10 +4,15 @@ import { Routes, RouterModule } from	"@angular/router";
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { TabsComponent } from './components/tabs/tabs.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+
+import { TabsComponent } from './components/tabs/tabs.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
 
 const	routes:	Routes	=	[
   {path:	'',	redirectTo:	'login',	pathMatch:	'full'},
@@ -26,11 +31,15 @@ const	routes:	Routes	=	[
   declarations: [
     AppComponent,
     LoginComponent,
-    TabsComponent
+    TabsComponent,
+    NavigationComponent
   ],
   imports: [
-    MatTabsModule,
     BrowserAnimationsModule,
+    MatTabsModule,
+    MatToolbarModule,    
+    MatIconModule,
+    MatButtonModule,
 
     BrowserModule,
     RouterModule.forRoot(routes, {useHash: false})
