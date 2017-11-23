@@ -1,7 +1,10 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<mat-sidenav-container (backdropClick)="sidenav.close()">
-<app-sidenav></app-sidenav>
-<app-navigation></app-navigation>
+<mat-sidenav-container class="container">
+    <mat-sidenav #sidenav class="sidenav">
+        Jolly good!
+    </mat-sidenav>
+
+    <app-navigation (sidenavClick)="showSidenav($event)"></app-navigation>
 
 <router-outlet></router-outlet>
 <div style="text-align:center">
