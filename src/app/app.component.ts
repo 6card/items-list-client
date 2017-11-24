@@ -7,9 +7,9 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
-  @ViewChild('sidenav') el:ElementRef;
+  @ViewChild('sidenav') sidenav:ElementRef;
 
   showSidenav = function(){
-    this.el.open();
+    this.sidenav.open();
   }
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
+import { AuthService } from '../../services/auth.service';
+
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
@@ -7,10 +9,11 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class NavigationComponent implements OnInit {
   @Output()  sidenavClick: EventEmitter<String> = new EventEmitter<String>();
-  constructor() { }
+  constructor(
+    protected authService:AuthService
+  ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   showSidenav(event){
     this.sidenavClick.emit(); //emmiting the event.

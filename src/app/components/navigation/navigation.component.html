@@ -6,6 +6,6 @@
     <button mat-button>Basic</button>
 
     <span class="spacer"></span>
-    <button mat-button><mat-icon class="icon" aria-label="Login">input</mat-icon> Login</button>
+    <button mat-button *ngIf="!authService.isAuthenticated()"><mat-icon class="icon" aria-label="Login">input</mat-icon> Login</button>
   </mat-toolbar-row>
 </mat-toolbar>

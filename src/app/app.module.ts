@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from	"@angular/router";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -18,6 +20,8 @@ import { MatInputModule } from '@angular/material';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+
+import { AuthService } from './services/auth.service';
 
 const	routes:	Routes	=	[
   {path:	'',	redirectTo:	'login',	pathMatch:	'full'},
@@ -52,9 +56,14 @@ const	routes:	Routes	=	[
     MatInputModule,
 
     BrowserModule,
+    HttpModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(routes, {useHash: false})
   ],
-  providers: [],
+  providers: [
+    AuthService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
