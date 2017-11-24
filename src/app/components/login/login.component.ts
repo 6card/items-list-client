@@ -16,7 +16,6 @@ export class LoginComponent implements OnInit {
   error: string = '';
   returnUrl: string;
   loading: boolean = false;
-  isSended: boolean = false;
   loginForm: FormGroup;
 
   constructor(
@@ -27,7 +26,13 @@ export class LoginComponent implements OnInit {
   ) {
 
     this.loginForm = this.fb.group({
-      Email: ['', Validators.required, patternValidator(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)],
+      Email: [
+        '', 
+        Validators.compose([
+          Validators.required, 
+          patternValidator(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/),
+        ]),
+      ],
       Password: ['', Validators.required]
     });
 
@@ -40,8 +45,7 @@ export class LoginComponent implements OnInit {
   
 
   doLogin(event:any) {
-    this.isSended = true;
-    if(this.loginForm.dirty && this.loginForm.valid) {
+    if(this.loginForm.valid) {
       this.loading = true;
       this.authService.login(this.loginForm.controls['Email'].value, this.loginForm.controls['Password'].value)
         .subscribe(result => {
@@ -52,8 +56,9 @@ export class LoginComponent implements OnInit {
             } else {
                 // login failed
                 this.error = 'Неправильный логин или пароль';
-                this.loading = false;
+                
             }
+            this.loading = false;
         });
     }
   }
