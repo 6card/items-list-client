@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { Routes, RouterModule } from	"@angular/router";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -56,7 +56,7 @@ const	routes:	Routes	=	[
     MatInputModule,
 
     BrowserModule,
-    HttpModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes, {useHash: false})

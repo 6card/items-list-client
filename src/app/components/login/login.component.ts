@@ -51,11 +51,10 @@ export class LoginComponent implements OnInit {
         .subscribe(result => {
             if (result === true) {
                 // login successful
-                //alert('OK');
                 this.router.navigate([this.returnUrl]);
             } else {
                 // login failed
-                this.error = 'Неправильный логин или пароль';
+                alert('Неправильный логин или пароль');
                 
             }
             this.loading = false;
