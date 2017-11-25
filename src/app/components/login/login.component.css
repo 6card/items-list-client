@@ -1,11 +1,15 @@
   
-  form.example-container > * {
+  .login-container form > * {
     width: 100%;
   }
 
-  form.example-container {
-    width: 380px;
+  .login-container {
+    padding: 0 2em;
     margin: 4em auto;
+  }
+  .login-container form {
+    max-width: 380px;
+    min-width: 200px;    
     padding: 3em 2em 2em 2em;
   }
 
