@@ -4,18 +4,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { Routes, RouterModule } from	"@angular/router";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { MaterialModule } from './shared/material.module';
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
-import { MatInputModule } from '@angular/material';
 
 import { TabsComponent } from './components/tabs/tabs.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -45,16 +37,8 @@ const	routes:	Routes	=	[
     SidenavComponent
   ],
   imports: [
-    BrowserAnimationsModule,
-    MatTabsModule,
-    MatToolbarModule,    
-    MatIconModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatInputModule,
-
+    MaterialModule,
+    
     BrowserModule,
     HttpClientModule,
     FormsModule,

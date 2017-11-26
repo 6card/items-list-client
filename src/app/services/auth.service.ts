@@ -18,11 +18,13 @@ export class AuthService {
 
   login(username: string, password: string): Observable<boolean> {
     const apiURL = 'http://home.6card.mykeenetic.ru/yii2/server/api/web/auth/login';
-    let headers = new  HttpHeaders ();
-    headers.set('Content-Type', 'application/json');
-    headers.set('Accept', 'application/json');
+    const headers = new  HttpHeaders({
+      'Content-Type': 'application/json', 
+      'Accept': 'application/json'
+    });
+    const options = { headers: headers };
 
-    return this.http.post(apiURL, { Email: username, Password: password }, { headers: headers })
+    return this.http.post(apiURL, { Email: username, Password: password }, options )
         .map((response: Response) => {
             let token = response && response['data']['token'];            
             if (token) {
