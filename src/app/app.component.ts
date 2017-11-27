@@ -9,7 +9,7 @@ export class AppComponent {
   title = 'app';
   @ViewChild('sidenav') sidenav:ElementRef;
 
-  showSidenav = function(){
+  showSidenav = function($event){
     this.sidenav.open();
   }
 }

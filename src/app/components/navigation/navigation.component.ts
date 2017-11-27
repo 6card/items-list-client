@@ -10,12 +10,12 @@ import { AuthService } from '../../services/auth.service';
 export class NavigationComponent implements OnInit {
   @Output()  sidenavClick: EventEmitter<String> = new EventEmitter<String>();
   constructor(
-    protected authService:AuthService
+    public authService:AuthService
   ) { }
 
   ngOnInit() { }
 
-  showSidenav(event){
+  showSidenav($event){
     this.sidenavClick.emit(); //emmiting the event.
   }
 

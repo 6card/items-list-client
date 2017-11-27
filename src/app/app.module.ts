@@ -6,8 +6,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './shared/app-routing.module';
 import { MaterialModule } from './shared/material.module';
 
-import { AppComponent } from './app.component';
 import { AuthService } from './services/auth.service';
+import { AuthGuard } from './services/auth-guard.service';
+import { ItemService } from './services/item.service';
+
+import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -35,6 +38,8 @@ import { ItemListComponent } from './components/item-list/item-list.component';
   ],
   providers: [
     AuthService,
+    AuthGuard,
+    ItemService,
   ],
   bootstrap: [AppComponent]
 })

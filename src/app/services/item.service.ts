@@ -1,8 +1,23 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpRequest, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+
+import { Item } from '../shared/item';
+
+//import 'rxjs/add/operator/retry';
 
 @Injectable()
 export class ItemService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
+  getItems(token: string) {
+    const apiURL = 'http://yii2.loc/server/api/web/items';
+    const params = new HttpParams()
+      .set('token', token);
+    const options = { params: params };    
+
+    return this.http.get<Item[]>(apiURL, options ); //.retry(3)
+  }
+ 
 }

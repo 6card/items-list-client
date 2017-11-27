@@ -9,6 +9,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material';
+import { MatListModule } from '@angular/material/list';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   imports: [
@@ -21,6 +23,8 @@ import { MatInputModule } from '@angular/material';
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
+    MatListModule,
+    MatCheckboxModule,
   ],
   exports: [
     BrowserAnimationsModule,
@@ -32,6 +36,8 @@ import { MatInputModule } from '@angular/material';
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
+    MatListModule,
+    MatCheckboxModule,
   ],
   declarations: []
 })

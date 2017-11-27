@@ -39,6 +39,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    //сброс авторизации
+    this.authService.logout();
     //получаем returnUrl
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }

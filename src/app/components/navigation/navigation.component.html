@@ -1,10 +1,11 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row class="mat-elevation-z6">
 
-    <button mat-button (click)="showSidenav()"><mat-icon class="icon" aria-label="Home">home</mat-icon> Home</button>
+    <button mat-button (click)="showSidenav($event)"><mat-icon class="icon" aria-label="Home">home</mat-icon> Home</button>
     <button mat-button [routerLink]="['/item']">Items</button>
 
     <span class="spacer"></span>
     <button mat-button *ngIf="!authService.isAuthenticated()"><mat-icon class="icon" aria-label="Login">input</mat-icon> Login</button>
+    <button mat-button *ngIf="authService.isAuthenticated()" [routerLink]="['/login']">Logout</button>
   </mat-toolbar-row>
 </mat-toolbar>

@@ -1,3 +1,7 @@
-<p>
-  item-list works!
-</p>
+<mat-list  *ngFor="let item of items">
+  <mat-list-item>
+    <mat-checkbox>{{item.name}}</mat-checkbox> 
+  </mat-list-item>
+  <mat-divider></mat-divider>
+ </mat-list> 
+ 
