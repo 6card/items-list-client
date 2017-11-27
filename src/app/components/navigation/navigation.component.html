@@ -2,6 +2,7 @@
   <mat-toolbar-row class="mat-elevation-z6">
 
     <button mat-button (click)="showSidenav()"><mat-icon class="icon" aria-label="Home">home</mat-icon> Home</button>
+    <button mat-button [routerLink]="['/item']">Items</button>
 
     <span class="spacer"></span>
     <button mat-button *ngIf="!authService.isAuthenticated()"><mat-icon class="icon" aria-label="Login">input</mat-icon> Login</button>
