@@ -12,7 +12,7 @@ export class ItemService {
   constructor(private http: HttpClient) { }
 
   getItems(token: string) {
-    const apiURL = 'hhttp://home.6card.mykeenetic.ru/yii2/server/api/web/items';
+    const apiURL = 'http://home.6card.mykeenetic.ru/yii2/server/api/web/items';
     const params = new HttpParams()
       .set('token', token);
     const options = { params: params };    
