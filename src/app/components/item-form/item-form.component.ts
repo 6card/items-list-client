@@ -35,23 +35,17 @@ export class ItemFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    for (let propName in changes) {
-      let chng = changes[propName];
-      let cur  = JSON.stringify(chng.currentValue);
-      let prev = JSON.stringify(chng.previousValue);
-      console.log(`${propName}: currentValue = ${cur}, previousValue = ${prev}`);
+
+    if (changes['loading']) {
+      console.log(changes['loading'].currentValue);
     }
   }
 
   onSubmit(event:any): void {  
-    this.loading = true;
+    
     if(this.itemForm.valid) {
       this.pushValues();
     }
-  }
-
-  getLoading() {
-    console.log(this.loading);
   }
 
   pushValues(): void {

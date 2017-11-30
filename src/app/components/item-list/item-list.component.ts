@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { AuthService } from '../../services/auth.service';
@@ -16,7 +16,7 @@ import 'rxjs/add/operator/map';
 export class ItemListComponent implements OnInit {
 
   public items: Item[];
-  public loading: boolean = false;
+  public loadingState: boolean = false;
 
   constructor(
     public authService: AuthService,
@@ -61,9 +61,10 @@ export class ItemListComponent implements OnInit {
   }
 
   createItem(obj: Array<any>) {
+    
     this.itemService.addItem(this.authService.token, obj['name'], obj['is_done'])
       .subscribe(result => {
-        this.loadItems(); 
+        
         //console.log(result);
           /*
           if (result === true) {
@@ -75,17 +76,13 @@ export class ItemListComponent implements OnInit {
               
           }
           */
-        this.getLoading();
-        console.log('form updated');
+        this.loadItems();  
+        this.loadingState = false; 
+        
       },
-      error => {
-        console.error(error);
-        this.getLoading();
+      error => {        
+        this.loadingState = false; 
       });
-  }
-
-  getLoading() {
-    this.loading = false;
   }
 
 }

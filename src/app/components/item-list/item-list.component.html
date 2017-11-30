@@ -4,9 +4,8 @@
   </mat-list-item>
   <mat-divider></mat-divider>
  </mat-list>
- <button mat-raised-button color="primary" type="submit" (click)="getLoading()">Get loading</button>
  <app-item-form
- [loading]="loading" 
+ [loading]="loadingState" 
  (sendResults)="formUpdated($event)"
  ></app-item-form>
  
