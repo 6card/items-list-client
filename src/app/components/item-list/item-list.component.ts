@@ -16,6 +16,7 @@ import 'rxjs/add/operator/map';
 export class ItemListComponent implements OnInit {
 
   public items: Item[];
+  public loading: boolean = false;
 
   constructor(
     public authService: AuthService,
@@ -23,15 +24,15 @@ export class ItemListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadMedias(); 
+    this.loadItems(); 
   }
 
-  loadMedias() {
+  loadItems() {
     this.itemService.getItems(this.authService.token)
       .subscribe(
         data => {
           this.items = data;
-          console.log(this.items);
+          //console.log(this.items);
         },
         err => {
           console.error(err);
@@ -49,6 +50,42 @@ export class ItemListComponent implements OnInit {
         }
         */
       );
+  }
+
+  formUpdated(params: any) {
+    const obj: any = {
+      'name': params.name,
+      'is_done' : params.is_done
+    }
+    this.createItem(obj);
+  }
+
+  createItem(obj: Array<any>) {
+    this.itemService.addItem(this.authService.token, obj['name'], obj['is_done'])
+      .subscribe(result => {
+        this.loadItems(); 
+        //console.log(result);
+          /*
+          if (result === true) {
+              // login successful
+              alert('DDDD');
+          } else {
+              // login failed
+              alert('Неправильный логин или пароль');
+              
+          }
+          */
+        this.getLoading();
+        console.log('form updated');
+      },
+      error => {
+        console.error(error);
+        this.getLoading();
+      });
+  }
+
+  getLoading() {
+    this.loading = false;
   }
 
 }

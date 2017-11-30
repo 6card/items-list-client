@@ -17,6 +17,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ItemDetailComponent } from './components/item-detail/item-detail.component';
 import { ItemListComponent } from './components/item-list/item-list.component';
+import { ItemFormComponent } from './components/item-form/item-form.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ItemListComponent } from './components/item-list/item-list.component';
     NavigationComponent,
     SidenavComponent,
     ItemDetailComponent,
-    ItemListComponent
+    ItemListComponent,
+    ItemFormComponent
   ],
   imports: [
     AppRoutingModule,
