@@ -7,6 +7,7 @@ import { ItemService } from '../../services/item.service';
 import { Item } from '../../shared/item';
 
 import 'rxjs/add/operator/map';
+import {Subject} from 'rxjs/Subject';
 
 @Component({
   selector: 'app-item-list',
@@ -14,6 +15,8 @@ import 'rxjs/add/operator/map';
   styleUrls: ['./item-list.component.css']
 })
 export class ItemListComponent implements OnInit {
+
+  parentSubject:Subject<any> = new Subject();
 
   public items: Item[];
   public loadingState: boolean = false;
@@ -27,12 +30,17 @@ export class ItemListComponent implements OnInit {
     this.loadItems(); 
   }
 
+  notifyChildren() {
+    this.parentSubject.next(false);
+  }
+
   loadItems() {
     this.itemService.getItems(this.authService.token)
       .subscribe(
         data => {
           this.items = data;
           //console.log(this.items);
+          this.notifyChildren();
         },
         err => {
           console.error(err);
@@ -77,11 +85,21 @@ export class ItemListComponent implements OnInit {
           }
           */
         this.loadItems();  
-        this.loadingState = false; 
+        
         
       },
       error => {        
-        this.loadingState = false; 
+        console.error(error);
+      });
+  }
+
+  deleteItem(id: number) {    
+    this.itemService.deleteItem(this.authService.token, id)
+      .subscribe(result => {        
+        console.log(result); 
+      },
+      error => {        
+        console.error(error);
       });
   }
 
