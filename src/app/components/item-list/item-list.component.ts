@@ -9,7 +9,7 @@ import { Item } from '../../shared/item';
 import 'rxjs/add/operator/map';
 import {Subject} from 'rxjs/Subject';
 
-import { trigger,style,transition,animate,keyframes,query,stagger } from '@angular/animations';
+import { group,trigger,style,transition,animate,keyframes,query,stagger } from '@angular/animations';
 
 @Component({
   selector: 'app-item-list',
@@ -20,21 +20,30 @@ import { trigger,style,transition,animate,keyframes,query,stagger } from '@angul
     trigger('goals', [
       transition('* => *', [
 
-        query(':enter', style({ opacity: 0 }), {optional: true}),
+        query(':enter', style({height: 0, transform: 'translateX(50px)', opacity: 0}), {optional: true}),
 
-        query(':enter', stagger('300ms', [
-          animate('.6s ease-in', keyframes([
-            style({opacity: 0, transform: 'translateY(-75%)', offset: 0}),
-            style({opacity: .5, transform: 'translateY(35px)',  offset: 0.3}),
-            style({opacity: 1, transform: 'translateY(0)',     offset: 1.0}),
-          ]))]), {optional: true})
-          ,
-        query(':leave', stagger('300ms', [
-          animate('.6s ease-out', keyframes([
-            style({opacity: 1, transform: 'translateY(0)', offset: 0}),
-            style({opacity: .5, transform: 'translateY(35px)',  offset: 0.3}),
-            style({opacity: 0, transform: 'translateY(-75%)',     offset: 1.0}),
-          ]))]), {optional: true})
+        query(':enter', stagger('100ms', [ //stagger - для каждого по отдельности  + задержка
+          group([
+            animate('0.3s 0.1s ease', style({
+              transform: 'translateX(0)',
+              height: 48
+            })),
+            animate('0.3s ease', style({
+              opacity: 1
+            }))
+          ])
+        ]), {optional: true}),
+        query(':leave', stagger('100ms', [
+          group([
+            animate('0.3s ease', style({
+              transform: 'translateX(50px)',
+              height: 0
+            })),
+            animate('0.3s 0.2s ease', style({
+              opacity: 0
+            }))
+          ])
+        ]), {optional: true})
       ])
     ])
     
@@ -44,7 +53,7 @@ export class ItemListComponent implements OnInit {
 
   parentSubject:Subject<any> = new Subject();
 
-  public items: Item[];
+  public items: Item[] = [];
   public loadingState: boolean = false;
 
   constructor(
@@ -97,9 +106,10 @@ export class ItemListComponent implements OnInit {
   createItem(obj: Array<any>) {
     
     this.itemService.addItem(this.authService.token, obj['name'], obj['is_done'])
-      .subscribe(result => {
-        
-        //console.log(result);
+      .subscribe((result: Item) => {
+        this.items.push(result);
+        this.notifyChildren();
+        //console.log(this.items.length);
           /*
           if (result === true) {
               // login successful
@@ -110,7 +120,7 @@ export class ItemListComponent implements OnInit {
               
           }
           */
-        this.loadItems();  
+        //this.loadItems();  
         
         
       },
@@ -123,11 +133,15 @@ export class ItemListComponent implements OnInit {
     this.items = this.items.filter(item => item.id !== id);
     this.itemService.deleteItem(this.authService.token, id)
       .subscribe(result => {        
-        console.log(result); 
+        //console.log(result); 
       },
       error => {        
         console.error(error);
       });
+  }
+
+  animationDone() {
+    //console.log('animation done');
   }
 
 }
