@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class AuthService {
 
-  public token: string;
+  public token: string = 'lJTQa16MQ7NBjanPk3TC5c50Qr4-I0tE';
 
   constructor(private http: HttpClient) {
   }

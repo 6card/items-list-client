@@ -9,10 +9,36 @@ import { Item } from '../../shared/item';
 import 'rxjs/add/operator/map';
 import {Subject} from 'rxjs/Subject';
 
+import { trigger,style,transition,animate,keyframes,query,stagger } from '@angular/animations';
+
 @Component({
   selector: 'app-item-list',
   templateUrl: './item-list.component.html',
-  styleUrls: ['./item-list.component.css']
+  styleUrls: ['./item-list.component.css'],
+  animations: [
+    
+    trigger('goals', [
+      transition('* => *', [
+
+        query(':enter', style({ opacity: 0 }), {optional: true}),
+
+        query(':enter', stagger('300ms', [
+          animate('.6s ease-in', keyframes([
+            style({opacity: 0, transform: 'translateY(-75%)', offset: 0}),
+            style({opacity: .5, transform: 'translateY(35px)',  offset: 0.3}),
+            style({opacity: 1, transform: 'translateY(0)',     offset: 1.0}),
+          ]))]), {optional: true})
+          ,
+        query(':leave', stagger('300ms', [
+          animate('.6s ease-out', keyframes([
+            style({opacity: 1, transform: 'translateY(0)', offset: 0}),
+            style({opacity: .5, transform: 'translateY(35px)',  offset: 0.3}),
+            style({opacity: 0, transform: 'translateY(-75%)',     offset: 1.0}),
+          ]))]), {optional: true})
+      ])
+    ])
+    
+  ]
 })
 export class ItemListComponent implements OnInit {
 
@@ -93,7 +119,8 @@ export class ItemListComponent implements OnInit {
       });
   }
 
-  deleteItem(id: number) {    
+  deleteItem(id: number) {
+    this.items = this.items.filter(item => item.id !== id);
     this.itemService.deleteItem(this.authService.token, id)
       .subscribe(result => {        
         console.log(result); 

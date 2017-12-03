@@ -1,4 +1,4 @@
-<mat-list  *ngFor="let item of items">
+<mat-list  *ngFor="let item of items" [@goals]="items.length">
   <mat-list-item>
     <mat-checkbox>{{item.name}}</mat-checkbox>
     <span class="spacer"></span>
