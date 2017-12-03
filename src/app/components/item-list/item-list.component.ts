@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { AuthService } from '../../services/auth.service';
@@ -140,7 +140,7 @@ export class ItemListComponent implements OnInit {
       });
   }
 
-  animationDone() {
+  animationDone(event) {
     //console.log('animation done');
   }
 
