@@ -17,7 +17,7 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<boolean> {
-    const apiURL = 'http://home.6card.mykeenetic.ru/yii2/server/api/web/auth/login';
+    const apiURL = 'http://home.6card.mykeenetic.ru/yii2/api/auth/login';
     const headers = new  HttpHeaders()
       .set('Content-Type', 'application/json') 
       .set('Accept', 'application/json');

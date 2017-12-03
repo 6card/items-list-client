@@ -36,7 +36,7 @@ export class ItemService {
   }
 
   deleteItem(token: string, id: number) {
-    const apiURL = `http://home.6card.mykeenetic.ru/yii2/server/api/web/items/${id}`;
+    const apiURL = `http://home.6card.mykeenetic.ru/yii2/api/items/${id}`;
 
     const params = new HttpParams()
       .set('token', token);
