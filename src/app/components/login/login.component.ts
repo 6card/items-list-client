@@ -6,10 +6,17 @@ import { patternValidator } from '../../shared/pattern-validator';
 
 import { AuthService } from '../../services/auth.service';
 
+import { fadeInAnimation } from '../../animations/index';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+
+  // make fade in animation available to this component
+  animations: [fadeInAnimation],  
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' }
 })
 export class LoginComponent implements OnInit {
 
@@ -51,20 +58,36 @@ export class LoginComponent implements OnInit {
       this.loading = true;
       this.authService.login(this.loginForm.controls['Email'].value, this.loginForm.controls['Password'].value)
         .subscribe(result => {
-            if (result === true) {
+            let data: any = this.respondHandler(result);
+            //console.log(data);
+            if (data.status === "success") {
                 // login successful
                 this.router.navigate([this.returnUrl]);
             } else {
                 // login failed
-                alert('Неправильный логин или пароль');
+                alert(data.message);
                 
             }
             this.loading = false;
         },
         error => {
-          console.error(error)
+          this.errorHandler(error)
         });
     }
+  }
+
+  protected respondHandler(res: any) {
+    //console.log(res);
+    if (!res.success) {
+        console.error(res.data.message);
+        return false;
+    }        
+    return res.data;        
+  }
+
+  protected errorHandler(error: any) {
+      //this.alertService.error(0, error);
+      console.error(error.message);
   }
 
 }

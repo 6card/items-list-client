@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class AuthService {
 
-  public token: string = 'lJTQa16MQ7NBjanPk3TC5c50Qr4-I0tE';
+  public token: string = 'gyckNOYm7mqgYnffTBKyQ5tVQPJTZMkM';
 
   constructor(private http: HttpClient) {
   }
@@ -16,7 +16,7 @@ export class AuthService {
     return this.token ? true : false;
   }
 
-  login(username: string, password: string): Observable<boolean> {
+  login(username: string, password: string): Observable<any> {
     const apiURL = 'http://home.6card.mykeenetic.ru/yii2/api/auth/login';
     const headers = new  HttpHeaders()
       .set('Content-Type', 'application/json') 
@@ -27,13 +27,12 @@ export class AuthService {
     let response = this.http.post(apiURL, { Email: username, Password: password }, options );
     return this.http.post(apiURL, { Email: username, Password: password }, options )
         .map((response: Response) => {
-            let token = response && response['data']['token'];            
+            let token = response && response['data']['data']['token'];            
             if (token) {
                 this.token = token;
-                return true;
-            } else {
-                return false;
+                //return true;
             }
+            return response;
         });
   }
 

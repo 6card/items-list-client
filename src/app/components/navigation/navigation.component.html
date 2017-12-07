@@ -3,6 +3,7 @@
 
     <button mat-button (click)="showSidenav($event)"><mat-icon class="icon" aria-label="Home">home</mat-icon> Home</button>
     <button mat-button [routerLink]="['/item']">Items</button>
+    <button mat-button [routerLink]="['/item/1']">Item #1</button>
 
     <span class="spacer"></span>
     <button mat-button *ngIf="!authService.isAuthenticated()"><mat-icon class="icon" aria-label="Login">input</mat-icon> Login</button>

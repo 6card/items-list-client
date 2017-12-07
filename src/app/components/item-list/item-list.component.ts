@@ -11,6 +11,9 @@ import {Subject} from 'rxjs/Subject';
 
 import { group,trigger,style,transition,animate,keyframes,query,stagger } from '@angular/animations';
 
+// import fade in animation
+import { fadeInAnimation } from '../../animations/index';
+
 @Component({
   selector: 'app-item-list',
   templateUrl: './item-list.component.html',
@@ -20,13 +23,18 @@ import { group,trigger,style,transition,animate,keyframes,query,stagger } from '
     trigger('goals', [
       transition('* => *', [
 
-        query(':enter', style({height: 0, transform: 'translateX(50px)', opacity: 0}), {optional: true}),
+        query(':enter', 
+          style({
+            height: 0, 
+            //transform: 'translateX(50px)', 
+            opacity: 0
+          }), {optional: true}),
 
         query(':enter', stagger('100ms', [ //stagger - для каждого по отдельности  + задержка
           group([
             animate('0.3s 0.1s ease', style({
-              transform: 'translateX(0)',
-              height: 48
+              //transform: 'translateX(0)',
+              height: '*'
             })),
             animate('0.3s ease', style({
               opacity: 1
@@ -36,7 +44,7 @@ import { group,trigger,style,transition,animate,keyframes,query,stagger } from '
         query(':leave', stagger('100ms', [
           group([
             animate('0.3s ease', style({
-              transform: 'translateX(50px)',
+              //transform: 'translateX(50px)',
               height: 0
             })),
             animate('0.3s 0.2s ease', style({
@@ -45,9 +53,13 @@ import { group,trigger,style,transition,animate,keyframes,query,stagger } from '
           ])
         ]), {optional: true})
       ])
-    ])
-    
-  ]
+    ]),
+
+    fadeInAnimation    
+  ],
+  
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' }
 })
 export class ItemListComponent implements OnInit {
 
@@ -71,14 +83,14 @@ export class ItemListComponent implements OnInit {
 
   loadItems() {
     this.itemService.getItems(this.authService.token)
-      .subscribe(
-        data => {
-          this.items = data;
-          //console.log(this.items);
+      .subscribe( result => {
+          let data: any = this.respondHandler(result);
+          if (data)
+            this.items = data;          
           this.notifyChildren();
         },
         err => {
-          console.error(err);
+          this.errorHandler(err);
         }
         /*
         (err: HttpErrorResponse) => {
@@ -106,26 +118,14 @@ export class ItemListComponent implements OnInit {
   createItem(obj: Array<any>) {
     
     this.itemService.addItem(this.authService.token, obj['name'], obj['is_done'])
-      .subscribe((result: Item) => {
-        this.items.push(result);
-        this.notifyChildren();
-        //console.log(this.items.length);
-          /*
-          if (result === true) {
-              // login successful
-              alert('DDDD');
-          } else {
-              // login failed
-              alert('Неправильный логин или пароль');
-              
-          }
-          */
-        //this.loadItems();  
-        
-        
+      .subscribe((result: any) => {
+        let data: any = this.respondHandler(result);
+        if (data)
+          this.items.push(data);
+        this.notifyChildren();        
       },
       error => {        
-        console.error(error);
+        this.errorHandler(error);
       });
   }
 
@@ -136,12 +136,25 @@ export class ItemListComponent implements OnInit {
         //console.log(result); 
       },
       error => {        
-        console.error(error);
+        this.errorHandler(error);
       });
   }
 
   animationDone(event) {
     //console.log('animation done');
+  }
+
+  protected respondHandler(res: any) {
+    if (!res.success) {
+        console.error(res.data.message);
+        return false;
+    }        
+    return res.data;        
+  }
+
+  protected errorHandler(error: any) {
+      //this.alertService.error(0, error);
+      console.error(error.message);
   }
 
 }

@@ -5,6 +5,7 @@ import { AuthGuard } from '../services/auth-guard.service';
 
 import { LoginComponent } from '../components/login/login.component';
 import { ItemListComponent } from '../components/item-list/item-list.component';
+import { ItemDetailComponent } from '../components/item-detail/item-detail.component';
 
 const	routes:	Routes	=	[
     {path:	'',	redirectTo:	'item',	pathMatch:	'full'},
@@ -16,6 +17,7 @@ const	routes:	Routes	=	[
     */
     { path:	'login',	component:	LoginComponent },
     { path:	'item',	component:	ItemListComponent, canActivate: [AuthGuard] },
+    { path:	'item/:id',	component:	ItemDetailComponent, canActivate: [AuthGuard] },
     { path:	'**',	redirectTo:	'login', pathMatch:	'full'}
   ];
 
