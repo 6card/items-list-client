@@ -2,13 +2,13 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 //https://coursetro.com/posts/code/29/Working-with-Angular-2-Material
 
-import { routerTransition } from './animations/index';
+import { routerTransition, fadeInAnimation } from './animations/index';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  animations: [routerTransition],
+  animations: [routerTransition, fadeInAnimation]
 })
 export class AppComponent {
   title = 'app';
@@ -25,5 +25,9 @@ export class AppComponent {
 
   getState(outlet) {
     return outlet.isActivated ? outlet.activatedRoute : '';
+  }
+
+  getRouteAnimation(outlet) {
+    return outlet.activatedRouteData.animation;
   }
 }

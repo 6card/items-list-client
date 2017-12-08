@@ -15,9 +15,9 @@ const	routes:	Routes	=	[
     { path:	'media/:id',	component:	MediaDetailComponent, canActivate: [AuthGuard] },
     //{ path:	'media/stat/:id',	component:	MediaStatComponent, canActivate: [AuthGuard] },
     */
-    { path:	'login',	component:	LoginComponent },
-    { path:	'item',	component:	ItemListComponent, canActivate: [AuthGuard] },
-    { path:	'item/:id',	component:	ItemDetailComponent, canActivate: [AuthGuard] },
+    { path:	'login',	component:	LoginComponent, data: { animation: 'login' } },
+    { path:	'item',	component:	ItemListComponent, canActivate: [AuthGuard], data: { animation: 'item-list' } },
+    { path:	'item/:id',	component:	ItemDetailComponent, canActivate: [AuthGuard], data: { animation: 'item-detail' } },
     { path:	'**',	redirectTo:	'login', pathMatch:	'full'}
   ];
 

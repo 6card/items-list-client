@@ -12,16 +12,28 @@ import {Subject} from 'rxjs/Subject';
 import { group,trigger,style,transition,animate,keyframes,query,stagger } from '@angular/animations';
 
 // import fade in animation
-import { fadeInAnimation } from '../../animations/index';
+//import { fadeInAnimation } from '../../animations/index';
 
 @Component({
   selector: 'app-item-list',
   templateUrl: './item-list.component.html',
   styleUrls: ['./item-list.component.css'],
   animations: [
+
+    trigger('queryAnimation', [
+      transition('* => *', [
+        // hide the inner elements
+        query('.block', style({ opacity: 0 })),
+  
+        // animate the inner elements in, one by one
+        query('.block', stagger(400, [ 
+          animate(1000, style({ opacity: 1 })),
+        ]))
+      ])
+    ]),
     
     trigger('goals', [
-      transition('* => *', [
+      transition('* <=> *', [
 
         query(':enter', 
           style({
@@ -51,15 +63,15 @@ import { fadeInAnimation } from '../../animations/index';
               opacity: 0
             }))
           ])
-        ]), {optional: true})
+        ]), {optional: true}),
       ])
     ]),
 
-    fadeInAnimation    
+    //fadeInAnimation    
   ],
   
   // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' }
+  //host: { '[@fadeInAnimation]': '' }
 })
 export class ItemListComponent implements OnInit {
 
@@ -67,11 +79,18 @@ export class ItemListComponent implements OnInit {
 
   public items: Item[] = [];
   public loadingState: boolean = false;
+  exp = '';
 
   constructor(
     public authService: AuthService,
     public itemService: ItemService,
   ) { }
+
+  
+  
+   goAnimate() {
+     this.exp = 'goAnimate';
+   }
 
   ngOnInit() {
     this.loadItems(); 

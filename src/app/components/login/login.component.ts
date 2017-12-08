@@ -6,7 +6,7 @@ import { patternValidator } from '../../shared/pattern-validator';
 
 import { AuthService } from '../../services/auth.service';
 
-import { fadeInAnimation } from '../../animations/index';
+//import { fadeInAnimation } from '../../animations/index';
 
 @Component({
   selector: 'app-login',
@@ -14,9 +14,9 @@ import { fadeInAnimation } from '../../animations/index';
   styleUrls: ['./login.component.css'],
 
   // make fade in animation available to this component
-  animations: [fadeInAnimation],  
+  //animations: [fadeInAnimation],  
   // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' }
+  //host: { '[@fadeInAnimation]': '' }
 })
 export class LoginComponent implements OnInit {
 

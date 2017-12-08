@@ -6,6 +6,19 @@
   </mat-list-item>
   <mat-divider></mat-divider>
  </mat-list>
+ <div [@queryAnimation]="exp">
+  <div class="block">
+    1212312312
+  </div>
+  <div class="block">
+    1212312312
+  </div>
+  <div class="block">
+    1212312312
+  </div>
+</div>
+
+<button (click)="goAnimate()">qadasdasd</button>
  <app-item-form
  [parentSubject]="parentSubject"
  (sendResults)="formUpdated($event)"

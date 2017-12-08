@@ -1,12 +1,12 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<mat-sidenav-container class="container" [@routerTransition]="getState(o)">
+<mat-sidenav-container class="container"  [@routerTransition]="getRouteAnimation(route)">
     <mat-sidenav #sidenav class="sidenav">
         Jolly good!
     </mat-sidenav>
 
     <app-navigation (sidenavClick)="showSidenav($event)"></app-navigation>
 
-    <router-outlet #o="outlet"></router-outlet>
+    <router-outlet #route="outlet"></router-outlet>
 
 
 </mat-sidenav-container>
