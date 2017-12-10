@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-//import { fadeInAnimation } from '../../animations/index';
+import { slideInOutAnimation } from '../../animations/index';
 
 @Component({
   selector: 'app-item-detail',
@@ -8,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./item-detail.component.css'],
 
   // make fade in animation available to this component
-  //animations: [fadeInAnimation],  
+  animations: [slideInOutAnimation],  
   // attach the fade in animation to the host (root) element of this component
-  //host: { '[@fadeInAnimation]': '' }
+  host: { '[@slideInOutAnimation]': '' }
 })
 export class ItemDetailComponent implements OnInit {
 

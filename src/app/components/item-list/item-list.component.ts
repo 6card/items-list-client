@@ -9,16 +9,33 @@ import { Item } from '../../shared/item';
 import 'rxjs/add/operator/map';
 import {Subject} from 'rxjs/Subject';
 
-import { group,trigger,style,transition,animate,keyframes,query,stagger } from '@angular/animations';
+import { group,trigger,style,transition,animate,keyframes,query,stagger, sequence } from '@angular/animations';
 
 // import fade in animation
-//import { fadeInAnimation } from '../../animations/index';
+import { fadeInAnimation } from '../../animations/index';
 
 @Component({
   selector: 'app-item-list',
   templateUrl: './item-list.component.html',
   styleUrls: ['./item-list.component.css'],
   animations: [
+
+    trigger('anim', [
+      transition('* => void', [
+        style({ height: '*', opacity: '1', transform: 'translateX(0)', 'box-shadow': '0 1px 4px 0 rgba(0, 0, 0, 0.3)'}),
+        sequence([
+          animate(".25s ease", style({ height: '*', opacity: '.2', transform: 'translateX(20px)', 'box-shadow': 'none'  })),
+          animate(".1s ease", style({ height: '0', opacity: 0, transform: 'translateX(20px)', 'box-shadow': 'none'  }))
+        ])
+      ]),
+      transition('void => active', [
+        style({ height: '0', opacity: '0', transform: 'translateX(20px)', 'box-shadow': 'none' }),
+        sequence([
+          animate(".1s ease", style({ height: '*', opacity: '.2', transform: 'translateX(20px)', 'box-shadow': 'none'  })),
+          animate(".35s ease", style({ height: '*', opacity: 1, transform: 'translateX(0)', 'box-shadow': '0 1px 4px 0 rgba(0, 0, 0, 0.3)'  }))
+        ])
+      ])
+    ]),
 
     trigger('queryAnimation', [
       transition('* => *', [
@@ -31,7 +48,7 @@ import { group,trigger,style,transition,animate,keyframes,query,stagger } from '
         ]))
       ])
     ]),
-    
+    //<mat-list [@goals]="items.length" (@goals.done)="animationDone($event)">
     trigger('goals', [
       transition('* <=> *', [
 
@@ -67,11 +84,11 @@ import { group,trigger,style,transition,animate,keyframes,query,stagger } from '
       ])
     ]),
 
-    //fadeInAnimation    
+    fadeInAnimation    
   ],
   
   // attach the fade in animation to the host (root) element of this component
-  //host: { '[@fadeInAnimation]': '' }
+  host: { '[@fadeInAnimation]': '' }
 })
 export class ItemListComponent implements OnInit {
 
@@ -139,8 +156,10 @@ export class ItemListComponent implements OnInit {
     this.itemService.addItem(this.authService.token, obj['name'], obj['is_done'])
       .subscribe((result: any) => {
         let data: any = this.respondHandler(result);
-        if (data)
+        if (data) {
+          data.animation = 'active';
           this.items.push(data);
+        }
         this.notifyChildren();        
       },
       error => {        

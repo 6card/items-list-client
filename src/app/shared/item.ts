@@ -3,4 +3,5 @@ export interface Item {
     name: string;
     user_id: number;
     is_done: boolean;
+    animation: string;
 }

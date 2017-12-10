@@ -1,12 +1,4 @@
-<mat-list [@goals]="items.length" (@goals.done)="animationDone($event)">
-  <mat-list-item  *ngFor="let item of items" >
-    <mat-checkbox>{{item.name}}</mat-checkbox>
-    <span class="spacer"></span>
-    <button mat-icon-button (click)="deleteItem(item.id)" class="right"><mat-icon class="icon" aria-label="Delete">delete</mat-icon></button>
-  </mat-list-item>
-  <mat-divider></mat-divider>
- </mat-list>
- <div [@queryAnimation]="exp">
+<div [@queryAnimation]="exp">
   <div class="block">
     1212312312
   </div>
@@ -18,9 +10,22 @@
   </div>
 </div>
 
-<button (click)="goAnimate()">qadasdasd</button>
+<button (click)="goAnimate()">Animate It</button>
+
+<mat-list>
+  <mat-list-item  *ngFor="let item of items"  [@anim]="item.animation">
+    <mat-checkbox><a [routerLink]="['edit', item.id]">{{item.name}}</a></mat-checkbox>
+    <span class="spacer"></span>
+    <button mat-icon-button (click)="deleteItem(item.id)" class="right"><mat-icon class="icon" aria-label="Delete">delete</mat-icon></button>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+ </mat-list>
  <app-item-form
  [parentSubject]="parentSubject"
  (sendResults)="formUpdated($event)"
  ></app-item-form>
+
+ <div class="view-side-form">
+  <router-outlet></router-outlet>
+</div>
  
