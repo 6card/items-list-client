@@ -19,6 +19,8 @@ import { ItemDetailComponent } from './components/item-detail/item-detail.compon
 import { ItemListComponent } from './components/item-list/item-list.component';
 import { ItemFormComponent } from './components/item-form/item-form.component';
 
+import { LayoutModule } from '@angular/cdk/layout';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +38,8 @@ import { ItemFormComponent } from './components/item-form/item-form.component';
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule    
+    ReactiveFormsModule,
+    LayoutModule    
   ],
   providers: [
     AuthService,

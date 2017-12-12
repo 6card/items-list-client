@@ -1,8 +1,16 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<mat-sidenav-container class="container"  >
-    <mat-sidenav #sidenav class="sidenav">
+<app-navigation (sidenavClick)="showSidenav($event)"></app-navigation>
+
+<mat-sidenav-container class="example-container" [class.example-is-mobile]="mobileQuery.matches">    
+        
+    <mat-sidenav #sidenav class="example-sidenav">
         Jolly good!
     </mat-sidenav>
-    <app-navigation (sidenavClick)="showSidenav($event)"></app-navigation>
-    <router-outlet #route="outlet"></router-outlet>
+
+    <mat-sidenav-content class="sidenav-content">
+        <router-outlet #route="outlet"></router-outlet>
+    </mat-sidenav-content>   
+
 </mat-sidenav-container>
+
+<div class="example-footer">Footer</div>
